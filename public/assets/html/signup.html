@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<h1></h1>
+	<h2>Create Account</h2>
+	<br>
+
+	<p id=error></p>
+
+	<form>
+  		First name: <input type="text" id="fname"><br>
+  		Last name: <input type="text" id="lname"><br>
+  		Email: <input type="text" id="email"><br>
+  		Photo URL: <input type="text" id="photo" onfocusout="checkPhoto()"><br>
+  		Password: <input type="text" id="password"><br>
+  		Confirm PW:<input type="text" id="confirmpw"><br>
+  		<button id="create">Create--></button>
+	</form>
+
+  	<button id="back"><--Back</button>
+
+  	<br>
+  	<br>
+  	<br>
+
+  	<img class="profile-pic" src="" style="height: 200px">
+
+</body>
+
+
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#back").on("click",function(){
+    	history.back();
+	});
+
+	$("#create").on("click",function(){
+		event.preventDefault();
+
+		if ( $("#fname").val().trim().toString().length == '0'){
+			$("#error").html("Error - First name can't be blank");
+			return;
+		}
+
+		if ( $("#lname").val().trim().toString().length == '0'){
+			$("#error").html("Error - Last name can't be blank");
+			return;
+		}
+
+		if ( $("#email").val().trim().toString().length == '0'){
+			$("#error").html("Error - Email can't be blank");
+			return;
+		}
+
+		if ( $("#photo").val().trim().toString().length == '0'){
+			$("#error").html("Error - Photo can't be blank");
+			return;
+		}
+
+		if ( $("#password").val().trim().toString().length == '0'){
+			$("#error").html("Error - Password can't be blank");
+			return;
+		}
+
+		if ( $("#confirmpw").val().trim().toString().length == '0'){
+			$("#error").html("Error - Please confirm password");
+			return;
+		}
+
+		if ($("#password").val().trim().toString() == $("#confirmpw").val().trim().toString()){
+			var newUser = {
+        		fname: $("#fname").val().trim().toString(),
+        		lname: $("#lname").val().trim().toString(),
+        		email: $("#email").val().trim().toLowerCase().toString(),
+        		photo: $("#photo").val().trim().toString(),
+        		password: $("#password").val().trim().toString()
+    		};
+
+    		$.post("/signup/newuser", newUser, function (response) {
+    			if (response == "UserExists"){
+    				$("#error").html("Error - User with that email already exists");
+    			}
+    			else if (response == "UserCreated"){
+    				sessionStorage.setItem("user", newUser.email);	
+    				window.location.href = "/main";
+    			}
+    			else {
+    				$("#error").html("Error - Could not reach server");
+    			}
+    		});
+		}
+		else{
+			$("#error").html("Error - Passwords don't match");
+			return
+		}    	
+	});
+
+	}); // End $(document).ready
+
+	function checkPhoto(){
+		var x = $("#photo").val().trim().toString();
+		
+		$.get(x)
+    	.done(function() { 
+    		console.log("good");
+    		$(".profile-pic").attr("src",x);	
+    	}).fail(function() { 
+    		$("#error").html("Error - The image URL you entered is invalid. Please try again.");
+    		$(".profile-pic").attr("src","");
+    	})
+	};
+
+</script>

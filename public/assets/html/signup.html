@@ -3,119 +3,74 @@
 <head>
 	<title></title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Bad+Script|Clicker+Script|Pinyon+Script" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/index.css">
+    <script src="assets/js/signup.js"></script>
 </head>
 <body>
 
-	<h1></h1>
-	<h2>Create Account</h2>
-	<br>
+    <div class="">
+        <img class="center logo-img" src="/assets/img/ant-heart.png">
+        <h1 class="text-center logo-text">Ant-Honey.com</h1>
+        <hr class="my-4">
+    </div>
 
-	<p id=error></p>
 
-	<form>
-  		First name: <input type="text" id="fname"><br>
-  		Last name: <input type="text" id="lname"><br>
-  		Email: <input type="text" id="email"><br>
-  		Photo URL: <input type="text" id="photo" onfocusout="checkPhoto()"><br>
-  		Password: <input type="text" id="password"><br>
-  		Confirm PW:<input type="text" id="confirmpw"><br>
-  		<button id="create">Create--></button>
-	</form>
 
-  	<button id="back"><--Back</button>
 
-  	<br>
-  	<br>
-  	<br>
 
-  	<img class="profile-pic" src="" style="height: 200px">
+
+
+   	<div class="container">
+    <div class="row">
+  		<div class="col-md-6">
+			<div class="signup-card card" style="width: 30rem;">
+   				<form class="signup-form">
+		   			<div class="form-group">
+		      			<label for="fname">First name</label>
+		                <input type="text" class="form-control" id="fname"  placeholder="First Name">
+		            </div>
+		            <div class="form-group">
+		      			<label for="lname">Last name</label>
+		                <input type="text" class="form-control" id="lname"  placeholder="Last Name">
+		            </div>
+		        	<div class="form-group">
+		      			<label for="exampleInputEmail1">Email address</label>
+		                <input type="email" id="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+		                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		            </div>
+		            <div class="form-group">
+		      			<label for="photo">Photo URL</label>
+		                <input type="text" class="form-control" id="photo"  placeholder="Photo URL" onfocusout="checkPhoto()">
+		            </div>
+		            <div class="form-group">
+		                <label for="exampleInputPassword1">Password</label>
+		                <input type="password" id="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		            </div>
+		            <div class="form-group">
+		                <label for="confirmpw">Password</label>
+		                <input type="password" id="confirmpw" class="form-control" placeholder="Confirm PW">
+		            </div>
+		            <button id="create" class="btn btn-primary">Submit</button>
+	        	</form>
+	        	<p id=error class="text-center"></p>
+    		</div>
+      	</div>
+
+      	<div class="col-md-6">
+      		<p id="profile-pic-comment" class="text-center"></p>
+      	  	<img class="profile-pic center" src="">
+      	</div>
+
+    </div>
+
+    <footer></footer>
+  </div>
+
 
 </body>
 
 
 </html>
 
-<script type="text/javascript">
-$(document).ready(function() {
-
-	$("#back").on("click",function(){
-    	history.back();
-	});
-
-	$("#create").on("click",function(){
-		event.preventDefault();
-
-		if ( $("#fname").val().trim().toString().length == '0'){
-			$("#error").html("Error - First name can't be blank");
-			return;
-		}
-
-		if ( $("#lname").val().trim().toString().length == '0'){
-			$("#error").html("Error - Last name can't be blank");
-			return;
-		}
-
-		if ( $("#email").val().trim().toString().length == '0'){
-			$("#error").html("Error - Email can't be blank");
-			return;
-		}
-
-		if ( $("#photo").val().trim().toString().length == '0'){
-			$("#error").html("Error - Photo can't be blank");
-			return;
-		}
-
-		if ( $("#password").val().trim().toString().length == '0'){
-			$("#error").html("Error - Password can't be blank");
-			return;
-		}
-
-		if ( $("#confirmpw").val().trim().toString().length == '0'){
-			$("#error").html("Error - Please confirm password");
-			return;
-		}
-
-		if ($("#password").val().trim().toString() == $("#confirmpw").val().trim().toString()){
-			var newUser = {
-        		fname: $("#fname").val().trim().toString(),
-        		lname: $("#lname").val().trim().toString(),
-        		email: $("#email").val().trim().toLowerCase().toString(),
-        		photo: $("#photo").val().trim().toString(),
-        		password: $("#password").val().trim().toString()
-    		};
-
-    		$.post("/signup/newuser", newUser, function (response) {
-    			if (response == "UserExists"){
-    				$("#error").html("Error - User with that email already exists");
-    			}
-    			else if (response == "UserCreated"){
-    				sessionStorage.setItem("user", newUser.email);	
-    				window.location.href = "/main";
-    			}
-    			else {
-    				$("#error").html("Error - Could not reach server");
-    			}
-    		});
-		}
-		else{
-			$("#error").html("Error - Passwords don't match");
-			return
-		}    	
-	});
-
-	}); // End $(document).ready
-
-	function checkPhoto(){
-		var x = $("#photo").val().trim().toString();
-		
-		$.get(x)
-    	.done(function() { 
-    		console.log("good");
-    		$(".profile-pic").attr("src",x);	
-    	}).fail(function() { 
-    		$("#error").html("Error - The image URL you entered is invalid. Please try again.");
-    		$(".profile-pic").attr("src","");
-    	})
-	};
-
-</script>

@@ -81,24 +81,39 @@ module.exports = function(app,db) {
 
             db.User.findAll({}).then(function(allUsers) {
 
-                var tempUsers = allUsers;
+                var workingArray = [];
+
+                // Remove current user from array of possible matches
+                for (i = 0; i < allUsers.length; i++){
+                    if (currentUser.email == allUsers[i].email){
+
+                    }
+                    else{
+                        workingArray.push(allUsers[i]);    
+                    }
+                    
+                }
+
+                var tempUsers = workingArray;
                 var responseArray = [];
                 let emailArray = [];
                 var distanceArray = [];
 
-                for (var i = 0; i < allUsers.length; i++){
-                    emailArray[i] = allUsers[i].email;
-                    distanceArray[i] = allUsers[i].distance;
+                // Save distance for later use
+                for (var i = 0; i < workingArray.length; i++){
+                    emailArray[i] = workingArray[i].email;
+                    distanceArray[i] = workingArray[i].distance;
                 }
 
 
+                // Determine which users are as far away from Anthony as current user
                 for (i = 0; i < tempUsers.length; i++){
                      tempUsers[i].distance = Math.abs(tempUsers[i].distance - currentUser.distance);
                 }
 
                 tempUsers.sort(compare);
 
-
+                // Prepare array of 5 users for response
                 for (i = 0; i < 5; i++){
                     responseArray.push(tempUsers[i]);
 

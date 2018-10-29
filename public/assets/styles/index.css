@@ -1,0 +1,55 @@
+.logo-img {
+    height: auto; 
+    width: auto; 
+    max-width: 150px; 
+    max-height: 150px;
+}
+
+.profile-pic {
+    height: auto; 
+    width: auto; 
+    max-width: 200px; 
+    max-height: 200px;
+}
+
+
+	
+h1 {
+	font-family: 'Pinyon Script', cursive;
+}
+
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.logo-text {
+	font-size: 40px;
+}
+
+.signin-form {
+    margin: 20px;
+}
+
+.signup-form {
+    margin: 20px;
+}
+
+.signup-card {
+    margin-left: 50px;
+}
+
+#error {
+	color: red;
+}
+
+#profile-pic-comment {
+	font-size: 50px;
+}

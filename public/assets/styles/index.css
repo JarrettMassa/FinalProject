@@ -53,3 +53,18 @@ h1 {
 #profile-pic-comment {
 	font-size: 50px;
 }
+
+.match-photo {
+	height: auto; 
+    width: auto; 
+    max-width: 75px; 
+    max-height: 75px;
+    margin-left: -13px;
+    margin-top: 3px;
+    margin-bottom: 5px;
+ 
+}
+
+.match-card {
+	margin-bottom: 10px;
+}

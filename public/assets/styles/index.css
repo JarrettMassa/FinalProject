@@ -5,6 +5,10 @@
     max-height: 150px;
 }
 
+.header {
+	opacity: 0;
+}
+
 .profile-pic {
     height: auto; 
     width: auto; 

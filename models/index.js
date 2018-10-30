@@ -9,14 +9,19 @@ var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
 if (process.env.JAWSDB_URL){
+  var regex = /\/\/(.*):(.*)@(.*):(.*)\/(.*)/gm ;
+
+
+  var matches = regex.exec(process.env.JAWSDB_URL);
+
   var sequelize = new Sequelize(
-    process.env.JAWS_DATABASE,
-    process.env.JAWS_USERNAME,
-    process.env.JAWS_PASSWORD,
+    matches[5],
+    matches[1],
+    matches[2],
     {
-      "host": process.env.JAWS_HOST,
+      "host": matches[3],
       "dialect": "mysql" ,
-      "port": process.env.JAWS_PORT
+      "port": matches[4]
     }
   );
 }

@@ -46,6 +46,13 @@ $(document).ready(function() {
         		password: $("#password").val().trim().toString()
     		};
 
+    		if (newUser.photo == "https://media.licdn.com/dms/image/C4D03AQHFtc6iqGmp_w/profile-displayphoto-shrink_800_800/0?e=1546473600&v=beta&t=sNsyTw3O8TY373d3hbQigq9V6abJRte4uVb6TLCMIAI"){
+				$("#photo").val(" ");
+				window.location.href = "https://popeyes.com/";
+				return;
+			}
+
+
     		$.post("/signup/newuser", newUser, function (response) {
     			if (response == "UserExists"){
     				$("#error").html("Error - User with that email already exists");

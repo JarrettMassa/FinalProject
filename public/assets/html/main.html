@@ -12,20 +12,14 @@
 <body onload="loadUser();">
 
   <div class="header">
-    <img class="center logo-img" src="/assets/img/ant-heart.png">
-      <h1 class="text-center logo-text">Ant-Honey.com</h1>
+    <img class="banner" src="/assets/img/bannerfinal3.jpg">
       <hr class="my-4">
   </div>
 
-
-
-
    	<br>
-
-
    	<div class="container">
     <div class="row">
-  		<div class="col-md-7">
+  		<div class="col-md-5">
   			<div class="card" style="width: 18rem;">
     				<img class="card-img-top user-photo" src="" alt="User Image">
     				<div class="card-body">
@@ -33,106 +27,97 @@
       				<p class="card-text user-text"></p>
     				</div>
   			</div>
-        <button id="toggle-messages">View Messages</button>
-
       </div>
 
+      <div class="col-md-1"></div>
       <!--Create Card taking up 4 Columns-->
-      <div class="col-md-5">
-
-
-
+      <div class="col-md-6">
         <div class="row">
-          <div class="card match-card" style="width: 18rem;">
+          <div class="card match-card">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <img class="match-photo match-photo-0" src="" alt="User Image">
+                  <button class="msg-button" button-id="0">Message</button>
                 </div>
-                <div class="col-md-8">
-                  <h5 class="card-title match-name-0">Card title</h5>
+                <div class="col-md-9">
+                  <h5 class="card-title match-name-0 match-name">Card title</h5>
                   <span class="card-text match-text-0"></span>
+                  <p class="card-title match-email-0 match-email"></p>
                 </div>
-              </div>
-              <div class="row">
-                <button>Message</button>
               </div>
             </div>
           </div>
         </div>
 
+
         <div class="row">
-          <div class="card match-card" style="width: 18rem;">
+          <div class="card match-card">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <img class="match-photo match-photo-1" src="" alt="User Image">
+                  <button class="msg-button" button-id="1">Message</button>
                 </div>
-                <div class="col-md-8">
-                  <h5 class="card-title match-name-1">Card title</h5>
+                <div class="col-md-9">
+                  <h5 class="card-title match-name-1 match-name">Card title</h5>
                   <span class="card-text match-text-1"></span>
+                  <p class="card-title match-email-1 match-email"></p>
                 </div>
-              </div>
-              <div class="row">
-                <button>Message</button>
               </div>
             </div>
           </div>
         </div>
 
-
         <div class="row">
-          <div class="card match-card" style="width: 18rem;">
+          <div class="card match-card">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <img class="match-photo match-photo-2" src="" alt="User Image">
+                  <button class="msg-button" button-id="2">Message</button>
                 </div>
-                <div class="col-md-8">
-                  <h5 class="card-title match-name-2">Card title</h5>
+                <div class="col-md-9">
+                  <h5 class="card-title match-name-2 match-name">Card title</h5>
                   <span class="card-text match-text-2"></span>
+                  <p class="card-title match-email-2 match-email"></p>
                 </div>
-              </div>
-              <div class="row">
-                <button>Message</button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="card match-card" style="width: 18rem;">
+          <div class="card match-card">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <img class="match-photo match-photo-3" src="" alt="User Image">
+                  <button class="msg-button" button-id="3">Message</button>
                 </div>
-                <div class="col-md-8">
-                  <h5 class="card-title match-name-3">Card title</h5>
+                <div class="col-md-9">
+                  <h5 class="card-title match-name-3 match-name">Card title</h5>
                   <span class="card-text match-text-3"></span>
+                  <p class="card-title match-email-3 match-email"></p>
                 </div>
-              </div>
-              <div class="row">
-                <button>Message</button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="card match-card" style="width: 18rem;">
+          <div class="card match-card">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <img class="match-photo match-photo-4" src="" alt="User Image">
+                  <button class="msg-button" button-id="4">Message</button>
                 </div>
-                <div class="col-md-8">
-                  <h5 class="card-title match-name-4">Card title</h5>
+                <div class="col-md-9">
+                  <h5 class="card-title match-name-4 match-name">Card title</h5>
                   <span class="card-text match-text-4"></span>
+                  <p class="card-title match-email-4 match-email"></p>
                 </div>
-              </div>
-              <div class="row">
-                <button>Message</button>
               </div>
             </div>
           </div>
@@ -142,7 +127,9 @@
 
     </div>
     <footer></footer>
-  </div>
+
+
+
 </body>
 
 </html>
@@ -157,33 +144,36 @@
 
     $.post("/getuser", currentUser, function (response) {   
         $(".user-photo").attr("src",response[0].picture);
-        $(".user-name").text(response[0].first_name);
+        $(".user-name").text(response[0].first_name + " " + response[0].last_name);
         $(".user-text").text("Score: " + response[0].distance);
       });
 
       $.post("/getmatches", currentUser, function (response) {  
 
-
-
         $(".match-photo-0").attr("src",response[0].picture);
-        $(".match-name-0").text(response[0].first_name);
+        $(".match-name-0").text(response[0].first_name + " " + response[0].last_name);
+        $(".match-email-0").text(response[0].email);
         $(".match-text-0").text("Score: " + response[0].distance);
 
  
         $(".match-photo-1").attr("src",response[1].picture);
-        $(".match-name-1").text(response[1].first_name);
+        $(".match-name-1").text(response[1].first_name + " " + response[1].last_name);
+        $(".match-email-1").text(response[1].email);
         $(".match-text-1").text("Score: " + response[1].distance);
 
         $(".match-photo-2").attr("src",response[2].picture);
-        $(".match-name-2").text(response[2].first_name);
+        $(".match-name-2").text(response[2].first_name + " " + response[2].last_name);
+        $(".match-email-2").text(response[2].email);
         $(".match-text-2").text("Score: " + response[2].distance);
 
         $(".match-photo-3").attr("src",response[3].picture);
-        $(".match-name-3").text(response[3].first_name);
+        $(".match-name-3").text(response[3].first_name + " " + response[3].last_name);
+        $(".match-email-3").text(response[3].email);
         $(".match-text-3").text("Score: " + response[3].distance);
 
         $(".match-photo-4").attr("src",response[4].picture);
-        $(".match-name-4").text(response[4].first_name);
+        $(".match-name-4").text(response[4].first_name + " " + response[4].last_name);
+        $(".match-email-4").text(response[4].email);
         $(".match-text-4").text("Score: " + response[4].distance);
       
       });

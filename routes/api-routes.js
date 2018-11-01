@@ -86,12 +86,10 @@ module.exports = function(app,db) {
                 // Remove current user from array of possible matches
                 for (i = 0; i < allUsers.length; i++){
                     if (currentUser.email == allUsers[i].email){
-
                     }
                     else{
                         workingArray.push(allUsers[i]);    
                     }
-                    
                 }
 
                 var tempUsers = workingArray;
@@ -116,12 +114,14 @@ module.exports = function(app,db) {
                 // Prepare array of 5 users for response
                 for (i = 0; i < 5; i++){
                     responseArray.push(tempUsers[i]);
-
                     for (j = 0; j < emailArray.length; j++){
                         if (responseArray[i].email == emailArray[j]){
                             responseArray[i].distance = distanceArray[j];
-
+                            if (responseArray[i].distance == currentUser.distance){
+                                responseArray[i].last_name = responseArray[i].last_name + " - Perfect Match!!!";
+                            }
                         }
+
                     }
                 }
 
